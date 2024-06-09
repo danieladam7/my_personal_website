@@ -29,7 +29,7 @@ and AWS deployment, infrastructure, and domain handling.
 
 ## Preview 🎞️
 
-![Screenshot](static/images/screenshot.png)
+![Screenshot](blog/static/images/screenshot.png)
 
 
 ## Usage 🎯
