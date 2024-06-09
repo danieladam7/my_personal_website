@@ -139,9 +139,9 @@ STATICFILES_STORAGE = "custom_storages.Statictorage"
 DEFAULT_FILE_STORAGE = "custom_storages.MediaStorage"
 
 RECAPTCHA_PUBLIC_KEY = os.getenv(
-    'RECAPTCHA_PUBLIC_KEY', "6Ldmg_IpAAAAAMuP1_pD6NXkUoqbfK0rGZzpIHfs")
+    'RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = os.getenv(
-    'RECAPTCHA_PRIVATE_KEY', "6Ldmg_IpAAAAAEn1DOsfXoFrb7hINbijXJobbKaE")
+    'RECAPTCHA_PRIVATE_KEY')
 
 
 EMAIL_BACKEND = os.getenv(
