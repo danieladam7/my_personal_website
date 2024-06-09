@@ -122,15 +122,6 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STATIC_URL = "/static/"
-
-STATICFILES_DIRS = [
-    BASE_DIR / "static"
-]
-
-MEDIA_ROOT = BASE_DIR / "uploads"
-MEDIA_URL = "/files/"
 
 AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME')
