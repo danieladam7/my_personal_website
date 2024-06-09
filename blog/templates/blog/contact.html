@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Contact
+{% endblock %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static "blog/contact.css" %}">
+{% endblock %}
+
+{% block content %}
+<section class="top-section">
+  <h1>Contact me</h1>
+</section>
+
+<section class="middle-section">
+  <div class="box">
+    <p class="contact-item"><i class="fas fa-user"></i> Daniel Adam</p>
+  </div>
+  <div class="box">
+    <p class="contact-item"><i class="fas fa-phone"></i> 058-7478992</p>
+  </div>
+  <div class="box">
+    <p class="contact-item">
+      <a href="https://www.linkedin.com/in/daniel-adam-backend-developer" target="_blank">LinkedIn</a>
+    </p>
+  </div>
+  <div class="box">
+    <p class="contact-item">
+      <a href="https://github.com/danieladam7" target="_blank">GitHub</a>
+    </p>
+  </div>
+</section>
+
+
+{% endblock %}

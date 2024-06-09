@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Skills
+{% endblock %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static "blog/skills.css" %}">
+{% endblock %}
+
+{% block content %}
+<section class="top-section">
+  <h1>Skills</h1>
+</section>
+<div class="middle-section">
+  <div class="box">
+    <p class="skill-item">Backend Skills</p>
+    <p>Python • Django • Unit tests • PostgreSQL</p>
+  </div>
+  <div class="box">
+    <p class="skill-item">AWS Cloud Skills</p>
+    <p>AWS Elastic Beanstalk for deployment • AWS S3 Buckets for files storage and retrieval </p>
+    <p>Setting production and staging environments • Defining environment variables</p>
+    <p>AWS CodePipline for CI/CD </p>
+    <p>AWS Rout 53 • Routing traffic from Elastic Beanstalk evironment to Route 53 domain</p>
+    <p>Setting SSL for https</p>
+  </div>
+  <div class="box">
+    <p class="skill-item">Soft Skills</p>
+    <p>Quick learner • Well organized • Highly self-motivated</p>
+    <p>Independent • Strong work ethic • Sense of ownership</p>
+    <p>Good communicator • Integrate fast into new environments</p>
+    <p></p>
+  </div>
+</div>
+</section>
+
+
+
+{% endblock %}

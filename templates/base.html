@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}
+  {% endblock %}</title>
+  <link rel="stylesheet" href="{% static "app.css" %}">
+  {% block css_files %}{% endblock %}
+</head>
+<body>
+  <header id="main-navigation">
+    <h1><a href="{% url "home" %}">Daniel Adam</a></h1>
+    <nav>
+      <a href="{% url "home" %}">Home</a>
+      <a href="{% url "skills" %}">Skills</a>
+      <a href="{% url "posts-page" %}">Blog</a>
+      <a href="{% url "contact" %}">Contact</a>
+    </nav>
+  </header>
+
+  {% if messages %}
+      <div class="messages">
+          {% for message in messages %}
+              <div class="message {{ message.tags }}">
+                  {{ message }}
+                  <span class="close" onclick="this.parentElement.style.display='none'">&times;</span>
+              </div>
+          {% endfor %}
+      </div>
+  {% endif %}
+
+  {% block content %}
+  {% endblock %}
+
+  <footer class="bottom-section">
+    <p>&copy; 2024 Daniel Adam</p>
+  </footer>
+  
+  {% block extra_js %}
+  {% endblock %}
+</body>
+</html>

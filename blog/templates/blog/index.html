@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static "blog/post.css" %}">
+<link rel="stylesheet" href="{% static "blog/index.css" %}">
+{% endblock %}
+
+{% block content %}
+<section id="welcome">
+  <header>
+    <img src="{% static "blog/images/Me.jpg" %}" alt="Daniel - The Author Of This Blog" />
+    <div class="title-container">
+      <h2>Junior Backend Developer</h2>
+      <p>AWS certified | B.Sc. Computer Science Student at Ben-Gurion University, graduating soon</p>
+      <p>Experienced in building scalable, reliable and resilient Backend Applications</p>
+      <p> </p> 
+    </div>
+  </header>
+</section>
+
+<section id="latest-posts">
+  <h2>My Latest Posts</h2>
+  <ul>
+    {% for post in posts %}
+      {% include "blog/includes/post.html" %}
+    {% endfor %}
+  </ul>
+</section>
+
+{% endblock %}
