@@ -29,7 +29,8 @@ and AWS deployment, infrastructure, and domain handling.
 
 ## Preview 🎞️
 
-![Screenshot](https://via.placeholder.com/800x600.png?text=Preview+Screenshot)
+![Screenshot](static/images/screenshot.png)
+
 
 ## Usage 🎯
 - Visit [danieladam.click](https://danieladam.click/) to explore my website and blog.
