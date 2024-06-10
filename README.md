@@ -1,6 +1,6 @@
 # Personal Website with Blog Section ([danieladam.click](https://danieladam.click/))
 
-A personal website featuring a blog section, developed with Django and Python, including CRUD operations on posts, tags, and comments and a PostgreSQL database
+A personal website featuring a blog section, developed with Django and Python, including CRUD operations on posts, tags, and comments on a PostgreSQL database
 and AWS deployment, infrastructure, and domain handling. 
 
 
@@ -22,7 +22,7 @@ and AWS deployment, infrastructure, and domain handling.
 - **AWS Elastic Beanstalk**: Used for hosting and managing the application.
 - **AWS Load Balancer**: Used for setting up http/s listener
 - **AWS S3**: Used for static and media file storage.
-- **AWS RDS**: Configured for database management.
+- **AWS RDS**: Configured for PostgreSQL database.
 - **AWS Route 53**: Used for domain management.
 - **AWS CAM**: Setup SSL certification.
 - **AWS CodePipeline**: Set up for CI/CD to integrate new features.
