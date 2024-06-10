@@ -20,7 +20,7 @@ and AWS deployment, infrastructure, and domain handling.
 
 ## Deployment 🌐
 - **AWS Elastic Beanstalk**: Used for hosting and managing the application.
-- **AWS Load Balance**: Used for setting up http/s listener
+- **AWS Load Balancer**: Used for setting up http/s listener
 - **AWS S3**: Used for static and media file storage.
 - **AWS RDS**: Configured for database management.
 - **AWS Route 53**: Used for domain management.
