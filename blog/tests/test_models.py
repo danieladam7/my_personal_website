@@ -1,6 +1,6 @@
 from datetime import date
 from django.test import TestCase
-from ..models import *
+from ..models import Post, Author, Tag, Comment
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 
