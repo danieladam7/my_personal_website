@@ -95,3 +95,35 @@ class PostModelTest(TestCase):
 
     def test_post_str(self):
         self.assertEqual(str(self.post), 'Test Post')
+
+
+class CommentModelTest(TestCase):
+    def setUp(self):
+        self.author = Author.objects.create(
+            first_name='Israel', last_name='Israeli', email_address='test@test.com')
+
+        self.tag = Tag.objects.create(caption='Test-Comment-Tag')
+        self.image = SimpleUploadedFile(
+            name='test_image.jpg', content=b'file_content', content_type='image/jpeg')
+
+        self.post = Post.objects.create(
+            title='Test Post',
+            excerpt='Preview of Test Post',
+            image=self.image,
+            date=date.today(),
+            image=self.image,
+            date='15/06/2024',
+            slug='test-post',
+            content='Some test conent.',
+            author=self.author,
+        )
+
+        self.post.tags.add(self.tag)
+
+        self.comment = Comment.objects.create(
+            user_name='Comment Tester',
+            user_email='comment@tester.com',
+            text='This is a test comment.',
+            post=self.post,
+            approved=False
+        )
