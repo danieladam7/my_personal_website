@@ -56,3 +56,7 @@ class StartPageViewTest(TestCase):
     def test_start_page_view_context_contains_posts(self):
         response = self.client.get(reverse('index'))
         self.assertIn('posts', response.context)
+
+    def test_start_page_view_context_posts_length(self):
+        response = self.client.get(reverse('index'))
+        self.assertEqual(len(response.context['posts']), 3)
