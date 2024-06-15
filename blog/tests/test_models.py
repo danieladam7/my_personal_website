@@ -5,7 +5,7 @@ from ..models import *
 class TagModelTest(TestCase):
 
     def setUp(self):
-        self.tag = Tag.object.create(captio='Test-tag')
+        self.tag = Tag.objects.create(caption='Test-tag')
 
     def test_tag_creation(self):
         self.assertEqual(self.tag.caption, "Test-tag")
