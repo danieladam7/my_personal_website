@@ -52,3 +52,7 @@ class StartPageViewTest(TestCase):
     def test_start_page_view_template(self):
         response = self.client.get(reverse('index'))
         self.assertTemplateUsed(response, 'blog/index.html')
+
+    def test_start_page_view_context_contains_posts(self):
+        response = self.client.get(reverse('index'))
+        self.assertIn('posts', response.context)
