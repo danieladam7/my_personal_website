@@ -2,9 +2,6 @@ from datetime import date
 from django.test import TestCase
 from ..models import *
 from django.core.files.uploadedfile import SimpleUploadedFile
-<< << << < HEAD
-== == == =
->>>>>> > bfb22a6264c1d9aac70ea8c9bf9da4b79066902b
 
 
 class TagModelTest(TestCase):
