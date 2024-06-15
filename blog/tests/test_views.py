@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
 from ..models import Post, Author, Tag, Comment
 from datetime import date
+from unittest.mock import patch
 
 
 class ContactViewTest(TestCase):
@@ -27,6 +28,10 @@ class SkillsViewTest(TestCase):
 
 class StartPageViewTest(TestCase):
     def setUp(self):
+        self.patcher = patch('django.core.files.storage.Storage.save')
+        self.mock_save = self.patcher.start()
+        self.mock_save.return_value = 'test_image.jpg'
+
         self.author = Author.objects.create(
             first_name='Israel', last_name='Israeli', email_address='test@pageview.com')
         self.tag = Tag.objects.create(caption='Test-Tag')
@@ -39,24 +44,26 @@ class StartPageViewTest(TestCase):
                 image=self.image,
                 date=date.today(),
                 slug=f'test-post-{i}',
-                content='Some test conent.',
+                content='Some test content.',
                 author=self.author,
             )
             post.tags.add(self.tag)
 
+    def tearDown(self):
+        self.patcher.stop()
 
     def test_start_page_view_status_code(self):
-        response = self.client.get(reverse('index'))
+        response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
 
     def test_start_page_view_template(self):
-        response = self.client.get(reverse('index'))
+        response = self.client.get(reverse('home'))
         self.assertTemplateUsed(response, 'blog/index.html')
 
     def test_start_page_view_context_contains_posts(self):
-        response = self.client.get(reverse('index'))
+        response = self.client.get(reverse('home'))
         self.assertIn('posts', response.context)
 
     def test_start_page_view_context_posts_length(self):
-        response = self.client.get(reverse('index'))
+        response = self.client.get(reverse('home'))
         self.assertEqual(len(response.context['posts']), 3)
