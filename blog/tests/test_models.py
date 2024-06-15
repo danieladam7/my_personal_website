@@ -36,7 +36,7 @@ class AuthorModelTest(TestCase):
 
 
 class PostModelTest(TestCase):
-    def setUP(self):
+    def setUp(self):
         self.author = Author.objects.create(
             first_name='Israel', last_name='Israeli', email_address='test@test.com')
 
