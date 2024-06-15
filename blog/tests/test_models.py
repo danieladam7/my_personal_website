@@ -33,3 +33,23 @@ class AuthorModelTest(TestCase):
 
     def test_author_str(self):
         self.assertEqual(str(self.author), 'Israel Israeli')
+
+
+class PostModelTest(TestCase):
+    def setUP(self):
+        self.author = Author.objects.create(
+            first_name='Israel', last_name='Israeli', email_address='test@test.com')
+
+        self.tag1 = Tag.objects.create(caption='Tag 1')
+        self.tag2 = Tag.objects.create(caption='Tag 2')
+
+        self.post = Post.objects.create(
+            title='Test Post',
+            excerpt='Preview of Test Post',
+            image='',
+            date='15/06/2024',
+            slug='test-post',
+            content='Some test conent.',
+            author=self.author,
+            tags=self.post.tags.add(self.tag1, self.tag2)
+        )
