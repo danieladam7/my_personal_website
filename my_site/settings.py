@@ -10,13 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-from django.http import HttpResponsePermanentRedirect
 from django.contrib.messages import constants as messages
 from pathlib import Path
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,8 +22,9 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = os.getenv("IS_DEVELOPMENT")
 
-ALLOWED_HOSTS = []  # os.getenv('APP_HOST')
-
+ALLOWED_HOSTS = [
+    os.getenv('APP_HOST'), '127.0.0.1'
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
