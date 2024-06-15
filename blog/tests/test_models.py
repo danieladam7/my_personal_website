@@ -1,10 +1,10 @@
+from datetime import date
 from django.test import TestCase
 from ..models import *
 from django.core.files.uploadedfile import SimpleUploadedFile
-<<<<<<< HEAD
-from datetime import date
-=======
->>>>>>> bfb22a6264c1d9aac70ea8c9bf9da4b79066902b
+<< << << < HEAD
+== == == =
+>>>>>> > bfb22a6264c1d9aac70ea8c9bf9da4b79066902b
 
 
 class TagModelTest(TestCase):
@@ -53,13 +53,11 @@ class PostModelTest(TestCase):
         self.post = Post.objects.create(
             title='Test Post',
             excerpt='Preview of Test Post',
-<<<<<<< HEAD
             image=self.image,
             date=date.today(),
-=======
             image=self.image
             date='15/06/2024',
->>>>>>> bfb22a6264c1d9aac70ea8c9bf9da4b79066902b
+            >>>>>> > bfb22a6264c1d9aac70ea8c9bf9da4b79066902b
             slug='test-post',
             content='Some test conent.',
             author=self.author,
@@ -99,9 +97,5 @@ class PostModelTest(TestCase):
     def test_post_tag2(self):
         self.assertIn(self.tag2, self.post.tags.all())
 
-<<<<<<< HEAD
     def test_post_str(self):
-=======
-        def test_post_str(self):
->>>>>>> bfb22a6264c1d9aac70ea8c9bf9da4b79066902b
         self.assertEqual(str(self.post), 'Test Post')
