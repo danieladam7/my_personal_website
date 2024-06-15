@@ -43,3 +43,8 @@ class StartPageViewTest(TestCase):
                 author=self.author,
             )
             post.tags.add(self.tag)
+
+
+    def test_start_page_view_status_code(self):
+        response = self.client.get(reverse('index'))
+        self.assertEqual(response.status_code, 200)
