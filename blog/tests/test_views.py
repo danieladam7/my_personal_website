@@ -48,3 +48,7 @@ class StartPageViewTest(TestCase):
     def test_start_page_view_status_code(self):
         response = self.client.get(reverse('index'))
         self.assertEqual(response.status_code, 200)
+
+    def test_start_page_view_template(self):
+        response = self.client.get(reverse('index'))
+        self.assertTemplateUsed(response, 'blog/index.html')
