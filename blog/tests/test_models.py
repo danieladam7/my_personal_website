@@ -52,9 +52,8 @@ class PostModelTest(TestCase):
             excerpt='Preview of Test Post',
             image=self.image,
             date=date.today(),
-            image=self.image
+            image=self.image,
             date='15/06/2024',
-            >>>>>> > bfb22a6264c1d9aac70ea8c9bf9da4b79066902b
             slug='test-post',
             content='Some test conent.',
             author=self.author,
