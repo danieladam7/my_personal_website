@@ -59,3 +59,6 @@ class PostModelTest(TestCase):
 
     def test_post_excerpt(self):
         self.assertEqual(self.post.excerpt, 'Preview of Test Post')
+
+    def test_post_date(self):
+        self.assertEqual(self.post.date, '15/06/2024')
