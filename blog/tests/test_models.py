@@ -130,3 +130,6 @@ class CommentModelTest(TestCase):
 
     def test_user_name(self):
         self.assertEqual(self.comment.user_name, 'Comment Tester')
+
+    def test_user_email(self):
+        self.assertEqual(self.comment.user_email, 'comment@tester.com')
