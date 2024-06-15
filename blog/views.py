@@ -64,7 +64,7 @@ class SinglePostView(View):
                 fail_silently=False,
             )
 
-            # Notify the user that the comment is awaiting approval
+            # Notify user that the comment is awaiting approval
             messages.add_message(request, messages.INFO,
                                  f'Dear {comment.user_name},\n\nThank you for your comment on my blog post. Your comment is awaiting approval and will be visible once approved.')
 
@@ -75,7 +75,6 @@ class SinglePostView(View):
     def _get_context(self, post, comment_form=None):
         if comment_form is None:
             comment_form = CommentForm()
-        # Using select_related and prefetch_related to reduce the number of queries
         post_tags = post.tags.all()
         comments = post.comments.all().order_by("-id")
         return {
