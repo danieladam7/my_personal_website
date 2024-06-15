@@ -62,3 +62,6 @@ class PostModelTest(TestCase):
 
     def test_post_date(self):
         self.assertEqual(self.post.date, '15/06/2024')
+
+    def test_post_slug(self):
+        self.assertEqual(self.post.slug, 'test-post')
