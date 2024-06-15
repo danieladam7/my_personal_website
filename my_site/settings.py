@@ -2,6 +2,7 @@
 from django.contrib.messages import constants as messages
 from pathlib import Path
 import os
+import sys
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -74,6 +75,12 @@ DATABASES = {
     }
 }
 
+if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    print("Switching to SQLite for testing.")
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'test_db.sqlite3'),
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
