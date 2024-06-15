@@ -136,3 +136,6 @@ class CommentModelTest(TestCase):
 
     def test_text(self):
         self.assertEqual(self.comment.text, 'This is a test comment.')
+
+    def test_post(self):
+        self.assertEqual(self.comment.post, self.post)
