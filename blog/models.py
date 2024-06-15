@@ -2,7 +2,11 @@ from django.db import models
 from django.core.validators import MinLengthValidator
 
 # Tag model to represent the tags associated with blog posts
+class Tag(models.Model):
+    caption = models.CharField(max_length=20, help_text="Enter a tag caption")
 
+    def __str__(self):
+        return self.caption
 
 # Author model to represent the authors of blog posts
 class Author(models.Model):
@@ -42,11 +46,7 @@ class Post(models.Model):
         return self.title
 
 
-class Tag(models.Model):
-    caption = models.CharField(max_length=20, help_text="Enter a tag caption")
 
-    def __str__(self):
-        return self.caption
 
 
 # Comment model to represent comments on blog posts
