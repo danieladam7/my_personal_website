@@ -56,3 +56,6 @@ class PostModelTest(TestCase):
 
     def test_post_title(self):
         self.assertEqual(self.post.title, 'Test Post')
+
+    def test_post_excerpt(self):
+        self.assertEqual(self.post.excerpt, 'Preview of Test Post')
