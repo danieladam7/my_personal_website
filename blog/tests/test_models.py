@@ -127,3 +127,6 @@ class CommentModelTest(TestCase):
             post=self.post,
             approved=False
         )
+
+    def test_user_name(self):
+        self.assertEqual(self.comment.user_name, 'Comment Tester')
