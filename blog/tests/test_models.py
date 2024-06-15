@@ -53,3 +53,6 @@ class PostModelTest(TestCase):
             author=self.author,
             tags=self.post.tags.add(self.tag1, self.tag2)
         )
+
+    def test_post_title(self):
+        self.assertEqual(self.post.title, 'Test Post')
