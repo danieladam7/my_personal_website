@@ -143,5 +143,11 @@ class SinglePostViewTest(TestCase):
         self.assertTemplateUsed(response, 'blog/post-detail.html')
 
     def test_single_post_view_context_post(self):
-        response = self.client.get(reverse('post-detail-page', args=['test-post']))
+        response = self.client.get(
+            reverse('post-detail-page', args=['test-post']))
         self.assertIn('post', response.context)
+
+    def test_single_post_view_context_post_value(self):
+        response = self.client.get(
+            reverse('post-detail-page', args=['test-post']))
+        self.assertEqual(response.context['post'], self.post)
