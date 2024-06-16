@@ -180,3 +180,8 @@ class SinglePostViewTest(TestCase):
         response = self.client.post(
             reverse('post-detail-page', args=['test-post']), self.comment_data)
         self.assertEqual(response.status_code, 302)
+
+    def test_single_post_view_comment_submission_exists(self):
+        self.client.post(reverse('post-detail-page',
+                         args=['test-post']), self.comment_data)
+        self.assertTrue(Comment.objects.filter(user_name='New User').exists())
