@@ -131,9 +131,9 @@ class SinglePostViewTest(TestCase):
             post.tags.add(self.tag)
 
         self.comment_data = {
-            'user_name': 'New User',
-            'user_email': 'new.user@example.com',
-            'text': 'This is a new comment.'
+            'user_name': 'New Test User',
+            'user_email': 'new.user@test_comment.com',
+            'text': 'This is a new test comment.'
         }
 
     def test_single_post_view_status_code(self):
@@ -176,4 +176,7 @@ class SinglePostViewTest(TestCase):
             reverse('post-detail-page', args=['test-post']))
         self.assertIn(self.comment, response.context['comments'])
 
-    
+    def test_single_post_view_comment_submission_status_code(self):
+        response = self.client.post(
+            reverse('post-detail-page', args=['test-post']), self.comment_data)
+        self.assertEqual(response.status_code, 302)
