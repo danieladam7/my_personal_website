@@ -13,5 +13,9 @@ class UrlsTest(SimpleTestCase):
         self.assertEqual(resolve(url).func.view_class, SkillsView)
 
     def test_all_posts_url_is_resolved(self):
-            url = reverse('posts-page')
-            self.assertEqual(resolve(url).func.view_class, AllPostsView)
+        url = reverse('posts-page')
+        self.assertEqual(resolve(url).func.view_class, AllPostsView)
+
+    def test_single_post_url_is_resolved(self):
+        url = reverse('post-detail-page', args=['some-slug'])
+        self.assertEqual(resolve(url).func.view_class, SinglePostView)
