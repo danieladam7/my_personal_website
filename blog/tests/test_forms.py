@@ -1,6 +1,6 @@
 from django.test import TestCase
 from blog.forms import CommentForm
-from blog.models import Post, Author, Tag
+from blog.models import *
 from datetime import date
 from unittest.mock import patch, Mock
 
