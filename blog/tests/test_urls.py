@@ -19,3 +19,7 @@ class UrlsTest(SimpleTestCase):
     def test_single_post_url_is_resolved(self):
         url = reverse('post-detail-page', args=['some-slug'])
         self.assertEqual(resolve(url).func.view_class, SinglePostView)
+
+    def test_contact_url_is_resolved(self):
+        url = reverse('contact')
+        self.assertEqual(resolve(url).func.view_class, ContactView)
