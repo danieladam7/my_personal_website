@@ -166,3 +166,8 @@ class SinglePostViewTest(TestCase):
         response = self.client.get(
             reverse('post-detail-page', args=['test-post']))
         self.assertIn('comments', response.context)
+
+    def test_single_post_view_context_comments_value(self):
+        response = self.client.get(
+            reverse('post-detail-page', args=['test-post']))
+        self.assertIn(self.comment, response.context['comments'])
