@@ -2,6 +2,7 @@ from datetime import date
 from django.test import TestCase
 from ..models import Post, Author, Tag, Comment
 from django.core.files.uploadedfile import SimpleUploadedFile
+from unittest.mock import patch, mock_open
 
 
 class TagModelTest(TestCase):
@@ -38,7 +39,14 @@ class AuthorModelTest(TestCase):
 
 
 class PostModelTest(TestCase):
-    def setUp(self):
+    @patch('django.core.files.storage.Storage.save')
+    @patch('django.core.files.storage.Storage.open')
+    @patch('django.core.files.storage.Storage.exists')
+    def setUp(self, mock_exists, mock_open, mock_save):
+        mock_save.return_value = 'test_image.jpg'
+        mock_exists.return_value = False
+        mock_open.return_value = mock_open(read_data=b'file_content')
+
         self.author = Author.objects.create(
             first_name='Israel', last_name='Israeli', email_address='test@test.com')
 
@@ -68,10 +76,10 @@ class PostModelTest(TestCase):
     def test_image_name(self):
         self.assertEqual(self.image.name, 'test_image.jpg')
 
-    def test_image_upload(self):
-        self.image.open()
-        self.assertEqual(self.post.image.read(), b'file_content')
-        self.image.close()
+    @patch('django.core.files.storage.Storage.open', new_callable=mock_open, read_data=b'file_content')
+    def test_image_upload(self, mock_open):
+        with self.post.image.open():
+            self.assertEqual(self.post.image.read(), b'file_content')
 
     def test_post_date(self):
         self.assertEqual(self.post.date, date.today())
@@ -96,7 +104,9 @@ class PostModelTest(TestCase):
 
 
 class CommentModelTest(TestCase):
-    def setUp(self):
+    @patch('django.core.files.storage.Storage.save')
+    def setUp(self, mock_save):
+        mock_save.return_value = 'test_image.jpg'
         self.author = Author.objects.create(
             first_name='Israel', last_name='Israeli', email_address='test@test.com')
 

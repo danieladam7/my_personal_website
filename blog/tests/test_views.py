@@ -67,3 +67,27 @@ class StartPageViewTest(TestCase):
     def test_start_page_view_context_posts_length(self):
         response = self.client.get(reverse('home'))
         self.assertEqual(len(response.context['posts']), 3)
+
+
+class AllPostsViewTest(TestCase):
+    def setUp(self):
+        self.patcher = patch('django.core.files.storage.Storage.save')
+        self.mock_save = self.patcher.start()
+        self.mock_save.return_value = 'test_image.jpg'
+
+        self.author = Author.objects.create(
+            first_name='Israel', last_name='Israeli', email_address='test@pageview.com')
+        self.tag = Tag.objects.create(caption='Test-Tag')
+        self.image = SimpleUploadedFile(
+            name='test_image.jpg', content=b'file_content', content_type='image/jpeg')
+        for i in range(5):
+            post = Post.objects.create(
+                title=f'Test Post {i}',
+                excerpt='Preview of Test Post',
+                image=self.image,
+                date=date.today(),
+                slug=f'test-post-{i}',
+                content='Some test content.',
+                author=self.author,
+            )
+            post.tags.add(self.tag)
