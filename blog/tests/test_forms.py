@@ -46,3 +46,10 @@ class CommentFormTest(TestCase):
         del invalid_data['user_name']
         form = CommentForm(data=invalid_data)
         self.assertIn('user_name', form.errors)
+
+    @patch('django_recaptcha.fields.ReCaptchaField.clean', return_value=True)
+    def test_missing_text(self, mock_clean):
+        invalid_data = self.valid_data.copy()
+        del invalid_data['text']
+        form = CommentForm(data=invalid_data)
+        self.assertIn('text', form.errors)
