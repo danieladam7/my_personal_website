@@ -10,13 +10,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-if 'test' in sys.argv:
-    SECRET_KEY = 'your-test-secret-key'
 
 DEBUG = os.getenv("IS_DEVELOPMENT")
 
 ALLOWED_HOSTS = [
-    os.getenv('APP_HOST'), '127.0.0.1'
+    os.getenv('APP_HOST')
 ]
 
 INSTALLED_APPS = [
@@ -135,11 +133,6 @@ RECAPTCHA_PUBLIC_KEY = os.getenv(
     'RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = os.getenv(
     'RECAPTCHA_PRIVATE_KEY')
-
-
-if 'test' in sys.argv:
-    RECAPTCHA_PUBLIC_KEY = 'test_public_key'
-    RECAPTCHA_PRIVATE_KEY = 'test_private_key'
 
 
 EMAIL_BACKEND = os.getenv(
