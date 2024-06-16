@@ -93,17 +93,41 @@ class AllPostsViewTest(TestCase):
             post.tags.add(self.tag)
 
     def test_all_posts_view_status_code(self):
-        response = self.client.get(reverse('all-posts'))
+        response = self.client.get(reverse('posts-page'))
         self.assertEqual(response.status_code, 200)
 
     def test_all_posts_view_template(self):
-        response = self.client.get(reverse('all-posts'))
+        response = self.client.get(reverse('posts-page'))
         self.assertTemplateUsed(response, 'blog/all-posts.html')
 
     def test_all_posts_view_context(self):
-        response = self.client.get(reverse('all-posts'))
+        response = self.client.get(reverse('posts-page'))
         self.assertIn('all_posts', response.context)
 
     def test_all_posts_view_context_length(self):
-        response = self.client.get(reverse('all-posts'))
+        response = self.client.get(reverse('posts-page'))
         self.assertEqual(len(response.context['all_posts']), 5)
+
+
+class SinglePostViewTest(TestCase):
+    def setUp(self):
+        self.patcher = patch('django.core.files.storage.Storage.save')
+        self.mock_save = self.patcher.start()
+        self.mock_save.return_value = 'test_image.jpg'
+
+        self.author = Author.objects.create(
+            first_name='Israel', last_name='Israeli', email_address='test@pageview.com')
+        self.tag = Tag.objects.create(caption='Test-Tag')
+        self.image = SimpleUploadedFile(
+            name='test_image.jpg', content=b'file_content', content_type='image/jpeg')
+        for i in range(5):
+            post = Post.objects.create(
+                title=f'Test Post {i}',
+                excerpt='Preview of Test Post',
+                image=self.image,
+                date=date.today(),
+                slug=f'test-post-{i}',
+                content='Some test content.',
+                author=self.author,
+            )
+            post.tags.add(self.tag)
