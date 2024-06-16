@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
 from ..models import Post, Author, Tag, Comment
 from datetime import date
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 
 
 class ContactViewTest(TestCase):
@@ -27,10 +27,9 @@ class SkillsViewTest(TestCase):
 
 
 class StartPageViewTest(TestCase):
-    def setUp(self):
-        self.patcher = patch('django.core.files.storage.Storage.save')
-        self.mock_save = self.patcher.start()
-        self.mock_save.return_value = 'test_image.jpg'
+    @patch('django.core.files.storage.Storage.save')
+    def setUp(self, mock_save):
+        mock_save.return_value = 'test_image.jpg'
 
         self.author = Author.objects.create(
             first_name='Israel', last_name='Israeli', email_address='test@pageview.com')
@@ -48,9 +47,6 @@ class StartPageViewTest(TestCase):
                 author=self.author,
             )
             post.tags.add(self.tag)
-
-    def tearDown(self):
-        self.patcher.stop()
 
     def test_start_page_view_status_code(self):
         response = self.client.get(reverse('home'))
@@ -108,7 +104,10 @@ class AllPostsViewTest(TestCase):
         self.assertEqual(len(response.context['all_posts']), 5)
 
 
+# mock google reCAPTACHA validation as true for comment testing
+@patch('django_recaptcha.fields.ReCaptchaField.clean', Mock(return_value=True))
 class SinglePostViewTest(TestCase):
+
     @patch('django.core.files.storage.Storage.save')
     def setUp(self, mock_save):
         mock_save.return_value = 'test_image.jpg'
@@ -118,22 +117,29 @@ class SinglePostViewTest(TestCase):
         self.tag = Tag.objects.create(caption='Test-Tag')
         self.image = SimpleUploadedFile(
             name='test_image.jpg', content=b'file_content', content_type='image/jpeg')
-        for i in range(5):
-            post = Post.objects.create(
-                title=f'Test Post {i}',
-                excerpt='Preview of Test Post',
-                image=self.image,
-                date=date.today(),
-                slug=f'test-post-{i}',
-                content='Some test content.',
-                author=self.author,
-            )
-            post.tags.add(self.tag)
+        self.post = Post.objects.create(
+            title='Test Post',
+            excerpt='Preview of Test Post',
+            image=self.image,
+            date=date.today(),
+            slug='test-post',
+            content='Some test content.',
+            author=self.author,
+        )
+        self.post.tags.add(self.tag)
+
+        self.comment = Comment.objects.create(
+            user_name='Test User',
+            user_email='test.user@test.com',
+            text='This is a test comment.',
+            post=self.post,
+            approved=True
+        )
 
         self.comment_data = {
-            'user_name': 'New Test User',
-            'user_email': 'new.user@test_comment.com',
-            'text': 'This is a new test comment.'
+            'user_name': 'Test User',
+            'user_email': 'test.user@test.com',
+            'text': 'This is a test comment.',
         }
 
     def test_single_post_view_status_code(self):
@@ -184,4 +190,5 @@ class SinglePostViewTest(TestCase):
     def test_single_post_view_comment_submission_exists(self):
         self.client.post(reverse('post-detail-page',
                          args=['test-post']), self.comment_data)
-        self.assertTrue(Comment.objects.filter(user_name='New User').exists())
+        self.assertTrue(Comment.objects.filter(
+            user_name='Test User').exists())
