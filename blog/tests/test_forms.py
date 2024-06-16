@@ -32,3 +32,10 @@ class CommentFormTest(TestCase):
     def test_valid_form(self, mock_clean):
         form = CommentForm(data=self.valid_data)
         self.assertTrue(form.is_valid())
+
+    @patch('django_recaptcha.fields.ReCaptchaField.clean', return_value=True)
+    def test_invalid_email(self, mock_clean):
+        invalid_data = self.valid_data.copy()
+        invalid_data['user_email'] = 'invalid-email'
+        form = CommentForm(data=invalid_data)
+        self.assertIn('user_email', form.errors)
