@@ -92,12 +92,14 @@ class AllPostsViewTest(TestCase):
             )
             post.tags.add(self.tag)
 
-
     def test_all_posts_view_status_code(self):
         response = self.client.get(reverse('all-posts'))
         self.assertEqual(response.status_code, 200)
 
-
     def test_all_posts_view_template(self):
         response = self.client.get(reverse('all-posts'))
         self.assertTemplateUsed(response, 'blog/all-posts.html')
+
+    def test_all_posts_view_context(self):
+        response = self.client.get(reverse('all-posts'))
+        self.assertIn('all_posts', response.context)
