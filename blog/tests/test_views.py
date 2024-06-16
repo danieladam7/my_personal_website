@@ -103,3 +103,7 @@ class AllPostsViewTest(TestCase):
     def test_all_posts_view_context(self):
         response = self.client.get(reverse('all-posts'))
         self.assertIn('all_posts', response.context)
+
+    def test_all_posts_view_context_length(self):
+        response = self.client.get(reverse('all-posts'))
+        self.assertEqual(len(response.context['all_posts']), 5)
