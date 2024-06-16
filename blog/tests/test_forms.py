@@ -27,3 +27,8 @@ class CommentFormTest(TestCase):
             'text': 'This is a test comment.',
             'captcha': 'test'
         }
+
+    @patch('django_recaptcha.fields.ReCaptchaField.clean', return_value=True)
+    def test_valid_form(self, mock_clean):
+        form = CommentForm(data=self.valid_data)
+        self.assertTrue(form.is_valid())
