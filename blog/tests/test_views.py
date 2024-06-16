@@ -132,7 +132,12 @@ class SinglePostViewTest(TestCase):
             )
             post.tags.add(self.tag)
 
-
     def test_single_post_view_status_code(self):
-        response = self.client.get(reverse('post-detail-page', args=['test-post']))
+        response = self.client.get(
+            reverse('post-detail-page', args=['test-post']))
         self.assertEqual(response.status_code, 200)
+
+
+    def test_single_post_view_template(self):
+        response = self.client.get(reverse('post-detail-page', args=['test-post']))
+        self.assertTemplateUsed(response, 'blog/post-detail.html')
