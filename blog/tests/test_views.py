@@ -152,7 +152,12 @@ class SinglePostViewTest(TestCase):
             reverse('post-detail-page', args=['test-post']))
         self.assertEqual(response.context['post'], self.post)
 
-
     def test_single_post_view_context_post_tags(self):
-        response = self.client.get(reverse('post-detail-page', args=['test-post']))
+        response = self.client.get(
+            reverse('post-detail-page', args=['test-post']))
         self.assertIn('post_tags', response.context)
+
+    def test_single_post_view_context_post_tags_value(self):
+        response = self.client.get(
+            reverse('post-detail-page', args=['test-post']))
+        self.assertIn(self.tag, response.context['post_tags'])
