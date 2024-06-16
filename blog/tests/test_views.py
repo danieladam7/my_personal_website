@@ -70,10 +70,9 @@ class StartPageViewTest(TestCase):
 
 
 class AllPostsViewTest(TestCase):
-    def setUp(self):
-        self.patcher = patch('django.core.files.storage.Storage.save')
-        self.mock_save = self.patcher.start()
-        self.mock_save.return_value = 'test_image.jpg'
+    @patch('django.core.files.storage.Storage.save')
+    def setUp(self, mock_save):
+        mock_save.return_value = 'test_image.jpg'
 
         self.author = Author.objects.create(
             first_name='Israel', last_name='Israeli', email_address='test@pageview.com')
@@ -110,10 +109,9 @@ class AllPostsViewTest(TestCase):
 
 
 class SinglePostViewTest(TestCase):
-    def setUp(self):
-        self.patcher = patch('django.core.files.storage.Storage.save')
-        self.mock_save = self.patcher.start()
-        self.mock_save.return_value = 'test_image.jpg'
+    @patch('django.core.files.storage.Storage.save')
+    def setUp(self, mock_save):
+        mock_save.return_value = 'test_image.jpg'
 
         self.author = Author.objects.create(
             first_name='Israel', last_name='Israeli', email_address='test@pageview.com')
