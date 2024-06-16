@@ -39,3 +39,10 @@ class CommentFormTest(TestCase):
         invalid_data['user_email'] = 'invalid-email'
         form = CommentForm(data=invalid_data)
         self.assertIn('user_email', form.errors)
+
+    @patch('django_recaptcha.fields.ReCaptchaField.clean', return_value=True)
+    def test_missing_user_name(self, mock_clean):
+        invalid_data = self.valid_data.copy()
+        del invalid_data['user_name']
+        form = CommentForm(data=invalid_data)
+        self.assertIn('user_name', form.errors)
